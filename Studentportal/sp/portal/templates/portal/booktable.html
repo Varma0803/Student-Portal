@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table</title>
+    <style>
+        body {
+            background-image: url('background-image.jpg'); /* Replace 'background-image.jpg' with the path to your background image */
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* Text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background color for better contrast */
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .content {
+            text-align: justify;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: auto;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #333; /* Text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Book a Table</h1>
+        </header>
+        <div class="content">
+            <p>Welcome to our restaurant! Please use the form below to book a table.</p>
+            <form  id="book-table-form" method="post" action="">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+<!--                <input type="submit" value="Submit">-->
+                <button id="book now">Book Now</button>
+
+            </form>
+        </div>
+    </div>
+
+<script>
+document.getElementById("book-table-form).addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Get form data
+    var formData = new FormData(this);
+
+    // AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/booktable/", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Handle success
+                console.log("Booking successful!");
+            } else {
+                // Handle error
+                console.error("Error booking!");
+            }
+        }
+    };
+    xhr.send(formData);
+});
+</script>
+
+</body>
+</html>

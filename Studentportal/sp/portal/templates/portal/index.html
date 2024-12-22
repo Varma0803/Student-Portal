@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my website</title>
+    <script>
+    function showAlert() {
+      alert("Order placed. Thank you!");
+    }
+      </script>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Lobster&family=Merriweather+Sans&family=Playfair+Display:ital,wght@0,600;1,400&family=Roboto+Slab:wght@200&display=swap"
+    rel="stylesheet">
+<style>
+    header::before {
+        background: url('https://source.unsplash.com/collection/190727/1600x900') no-repeat center center/cover;
+        content: " ";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        /* opacity: 0.1; */
+    }
+
+    .left {
+        display: inline-block;
+        /* border:2px solid red; */
+        position: absolute;
+        left: 20px;
+        top: 33px;
+        color:black;
+    }
+
+    .left div {
+        line-height: 19px;
+        font-size: 26px;
+        text-align: center;
+        font-family: 'Lobster', 'cursive';
+    }
+
+    .mid {
+        display: block;
+        width: 47%;
+        margin: -7px auto;
+        top: 35px;
+        /* border:2px solid green; */
+
+
+    }
+
+    .right {
+        display: inline-block;
+        /* border:2px solid blue; */
+        position: absolute;
+        right: 20px;
+        top: 28px;
+    }
+
+    .navbar {
+        display: flex;
+
+    }
+
+    .navbar li {
+        font-size: 20px;
+        display: flex;
+
+    }
+
+    .navbar li a {
+        color: black;
+        padding: 25px 23px;
+        text-decoration: none;
+        justify-content: center;
+        font-family: 'Lobster', 'cursive';
+
+    }
+
+    .navbar li a:hover,
+    .navbar li a.active {
+        text-decoration: underline;
+        color: teal;
+
+    }
+
+    .btn {
+        font-family: 'Lobster', 'cursive';
+        margin: 2px 10px;
+        background-color: darkgoldenrod;
+        color: darkred;
+        padding: 3px 15px;
+        border: 2px solid rgb(36, 11, 30);
+        border-radius: 15px;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: floralwhite;
+
+    }
+
+    .container {
+        /* border:2px solid brown; */
+        margin: 26px 381px;
+        padding: 54px;
+        width: 22%;
+        justify-content: center;
+    }
+
+
+    .contaner h1 {
+        text-align: center;
+        margin: 20px 20px;
+        font-family: 'Lobster', 'cursive';
+    }
+
+    .container button {
+        display: block;
+        width: 37%;
+        padding: 5px 9px;
+        margin: 6px;
+        border-radius: 10px;
+        border-color: black;
+        font-family: 'Lobster', 'cursive';
+        float:20px;
+    }
+    .container button:hover{
+        background-color:darkolivegreen;
+        color:darkgrey;
+        cursor: pointer;
+    }
+
+     .form-container {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        border: 1px solid #ccc;
+        background-color: #f2f2f2;
+        padding: 20px;
+        max-width: 300px;
+    }
+
+    /* Styles for form container */
+        .form-container {
+            display: none; /* Hide the form by default */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align:center;
+
+        }
+
+</style>
+
+
+<body>
+{% load static %}
+    <header class="header">
+        <div class="left">
+
+<!--            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKN-3SOwgPMk_BauUfB65h_RY6l5geCKZd7g&usqp=CAU">-->
+<!--            <img src='{% static "portal/images.jpg" %}'>-->
+            <div>The Royal Catrers</div>
+        </div>
+        <!-- mid box for navbar -->
+         <div class="mid">
+            <ul class="navbar">
+                <li><a href="#"class="active">Home</a></li>
+                <li><a href="menu">Menu</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="booktable">Book Table</a></li>
+
+
+            </ul>
+        </div>
+        <!-- right box for buuton -->
+        <div class="right">
+            <button class="btn">call us</button>
+
+        </div>
+    </header>
+    <div class="container">
+        <h1>Full Service Catering</h1>
+        <p>In my Food World there is no fear or guilt,only joy and balance
+        </p>
+
+    <!-- Order Now button -->
+    <button id="order-now-btn">Order Now</button>
+
+    </div>
+
+      <!-- Form container -->
+    <div class="form-container">
+        <h2>Order Form</h2>
+            <!-- Form fields -->
+             <form id="order-form" method="post" action="">
+                     {% csrf_token %}
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <!-- Add more form fields as needed -->
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="address">Address:</label><br>
+            <textarea id="address" name="address" required></textarea><br><br>
+
+            <input type="submit" value="Submit" id="submit-now" onclick="showAlert()">
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to show/hide the form container when Order Now button is clicked
+        document.getElementById("order-now-btn").addEventListener("click", function() {
+            var formContainer = document.querySelector(".form-container");
+            formContainer.style.display = "block";
+            // Smooth scroll to the form container
+            formContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("order-form");
+    var messageContainer = document.getElementById("message-container");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // You can perform additional form validation here if needed
+
+        // Simulate form submission using fetch API or XMLHttpRequest
+        fetch(form.action, {
+            method: form.method,
+            body: new FormData(form)
+        })
+        .then(response => {
+            if (response.ok) {
+                // If the response is successful, display the message
+                messageContainer.textContent = "Order placed. Thank you!";
+            } else {
+                // If there's an error, handle it accordingly
+                messageContainer.textContent = "Error processing the order.";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            messageContainer.textContent = "An error occurred. Please try again later.";
+        });
+    });
+});
+    </script>
+
+</body>
+
+</html>
